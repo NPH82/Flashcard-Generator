@@ -1,9 +1,22 @@
-module.exports = BasicCard;
+var inquirer = require('inquirer');
 
-var BasicCard = function(front, back) {
+function BasicCard(front, back) {
 	this.front = front;
 	this.back = back;
 };
 
-var front = (text.front);
-var back = (text.back);
+inquirer.prompt([
+	{
+		name: 'front',
+		message: 'Enter statement for front of flashcard.'
+	}, {
+		name: 'back',
+		message: 'Enter answer for back of flashcard.'
+	}
+]).then(function(answers) {
+	var flashcard = new BasicCard(answers.front, answers.back);
+
+	console.log(flashcard);
+});
+
+module.exports = BasicCard;
