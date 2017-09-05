@@ -9,7 +9,7 @@ function ClozeCard(text, cloze) {
 
 //throw error if cloze deletion doesn't appear in text.
 ClozeCard.prototype.noCloze = function (err) {
-	if(!cloze) {
+	if(!text.includes(cloze)) {
 		console.log(err);
 	}
 }
@@ -24,7 +24,8 @@ inquirer.prompt([
 	}
 	]).then(function(answers) {
 		var clozeFlashcard = new ClozeCard(answers.text, answers.cloze);
-		clozeFlashcard.cloze.replace(cloze, ' ');
+		//need to fix this below
+		
 		console.log(clozeFlashcard);
 		console.log(clozeFlashcard.partial.join());
 	});
