@@ -2,6 +2,7 @@ var inquirer = require('inquirer');
 var fs = require('file-system');
 var basicCard = require('./BasicCard.js');
 var clozeCard = require('./ClozeCard.js');
+var viewCards = require('./flashCards.js');
 
 var flashCards = [];
 
@@ -38,6 +39,7 @@ var createCard = function() {
                 		console.log(err);
                 	}
                 });
+                 viewFlashCards();
             });
         } else {
             inquirer.prompt([{
@@ -65,11 +67,32 @@ var createCard = function() {
                     	if(err) {
                     		console.log(err);
                     	}
+                    	 viewFlashCards();
                     });
                 }
 
             })
         }
     });
+   
+}
+
+var viewFlashCards = function () {
+	fs.readFile('flashcards.js', 'utf8', function(err, data) {
+		if(err) {
+			return console.log(err);
+		} else {
+			console.log(JSON.parse(data));
+
+			var dataArr = data.split(',');
+			console.log(dataArr);
+			// console.log(data.cloze);
+			// console.log(data.partial);
+
+		// } else if(flashcardObject.type === 'basicCard') {
+		// 	console.log(flashcardObject.front);
+		// 	console.log(flashcardObject.back);
+		}
+	})
 }
 createCard();
